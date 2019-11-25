@@ -94,16 +94,29 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text("HELLO"),
         ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 50.0),
-          child: Card(
-            child: Align(
-              alignment: Alignment.center,
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: ListView.builder(
-                  itemCount: list.length,
-                  itemBuilder: _listItemBuilder,
+        body: Align(
+          alignment: Alignment.center,
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: DraggableScrollableSheet(
+              
+              minChildSize: 0.4,
+              maxChildSize: 1.0,
+              builder: (context, ScrollController scrollController) => Card(
+                elevation: 5.0,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).canvasColor,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20.0),
+                      topRight: Radius.circular(20.0),
+                    ),
+                  ),
+                  child: ListView.builder(
+                    controller: scrollController,
+                    itemCount: list.length,
+                    itemBuilder: _listItemBuilder,
+                  ),
                 ),
               ),
             ),
